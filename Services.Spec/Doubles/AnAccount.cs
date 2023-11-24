@@ -1,20 +1,20 @@
 public class AnAccount
 {
-    string id = Guid.NewGuid().ToString();
-    decimal balance = 0;
-     public AnAccount WithId(string id)
-     {
-        this.id = id;
-        return this;
-     }
+    private string _id = Guid.NewGuid().ToString();
+    private decimal _balance = 0;
 
-     public AnAccount WithBalance(decimal balance)
-     {
-        this.balance = balance;
+    public AnAccount WithId(string id)
+    {
+        _id = id;
         return this;
-     }
+    }
 
-     public Account Please()
-     => new Account(id, balance);
-     
+    public AnAccount WithBalance(decimal balance)
+    {
+        _balance = balance;
+        return this;
+    }
+
+    public Account Please()
+        => new Account(_id, _balance);
 }

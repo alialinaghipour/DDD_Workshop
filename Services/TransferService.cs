@@ -1,32 +1,29 @@
 public class TransferService : ITransferService
 {
-    Accounts accounts;
+    private readonly Accounts _accounts;
 
     public TransferService(Accounts accounts)
     {
-        this.accounts = accounts;
+        this._accounts = accounts;
     }
 
     public void Transfer(string creditAccountId, string debitAccountId, decimal amount)
     {
-        var creditAccount = accounts.FindById(creditAccountId);
-        var debitAccount = accounts.FindById(debitAccountId);
+        var creditAccount = _accounts.FindById(creditAccountId);
+        var debitAccount = _accounts.FindById(debitAccountId);
 
         if (debitAccount is null)
         {
             debitAccount = new Account(debitAccountId);
-            accounts.Add(debitAccount);
+            _accounts.Add(debitAccount);
         }
 
         if(creditAccount is null) throw new InvalidOperationException($"Credit account with the id '{creditAccountId}' not found.");
-        // if(debitAccount is null) throw new InvalidOperationException($"Debit account with the id '{debitAccountId}' not found.");
 
         creditAccount.Credit(amount);
         debitAccount.Debit(amount);
 
-        accounts.Update(creditAccount);
-        accounts.Update(debitAccount);
-
-
+        _accounts.Update(creditAccount);
+        _accounts.Update(debitAccount);
     }
 }
