@@ -100,4 +100,32 @@ public class MoneySpecs
 
         result.Value.Should().Be(expectedValue);
     }
+    
+    [Theory]
+    [RandomMinMaxValue]
+    public void Money_less_than_operator_should_return_true_when_left_value_is_less(
+        decimal minValue,
+        decimal maxValue)
+    {
+        Money money1 = new Money(minValue);
+        Money money2 = new Money(maxValue);
+
+        bool result = money1 < money2;
+
+        result.Should().BeTrue();
+    }
+    
+    [Theory]
+    [RandomMinMaxValue]
+    public void Money_less_than_operator_should_return_false_when_left_value_is_not_less(
+        decimal minValue,
+        decimal maxValue)
+    { ;
+        Money money1 = new Money(maxValue);
+        Money money2 = new Money(minValue);
+
+        bool result = money1 < money2;
+
+        result.Should().BeFalse();
+    }
 }
