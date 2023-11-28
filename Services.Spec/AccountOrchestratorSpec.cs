@@ -5,7 +5,7 @@ public class AccountOrchestratorSpec
         string accountId,
         decimal balance,
         [Frozen] Accounts _,
-        TransactionQueries queries,
+        AccountQueries queries,
         AccountOrchestrator accountOrchestrator)
     {
         accountOrchestrator.OpenAccount(accountId, balance.ConvertToPositive());

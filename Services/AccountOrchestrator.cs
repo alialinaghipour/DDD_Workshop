@@ -8,6 +8,6 @@ public class AccountOrchestrator
     
     public void OpenAccount(string accountId, decimal initialBalance)
     {
-        accounts.Add(new Account(accountId,initialBalance));
+        accounts.Add(new Account(accountId, initialBalance));
     }
 }
