@@ -128,4 +128,16 @@ public class MoneySpecs
 
         result.Should().BeFalse();
     }
+    
+    [Theory,AutoData]
+    public void Money_implicit_conversion_should_convert_decimal_to_money(
+        decimal value)
+    {
+        value = value.ConvertToPositive();
+
+        Money money = value;
+
+        money.Should().NotBeNull();
+        money.Value.Should().Be(value);
+    }
 }
