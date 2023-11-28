@@ -84,5 +84,20 @@ public class MoneySpecs
         var actual = () => new Money(amount);
 
         actual.Should().Throw<Exception>();
-    } 
+    }
+    
+    [Theory]
+    [PositiveRandomRange]
+    public void Money_addition_should_return_correct_result(
+        decimal value1,
+        decimal value2)
+    {
+        Money money1 = new Money(value1);
+        Money money2 = new Money(value2);
+        var expectedValue = (money1 + money2).Value;
+
+        Money result = money1 + money2;
+
+        result.Value.Should().Be(expectedValue);
+    }
 }
