@@ -1,23 +1,23 @@
 public class Account
 {
-    public Account(string id, Money initialBalance)
+    public Account(AccountId id, Money initialBalance)
     {
         Id = id;
         Balance = initialBalance;
     }
-    public string Id { get; }
+    public AccountId Id { get; }
     public Money Balance { get; private set; }
 
     public void Credit(Money amount)
-    { 
+    {
         if (Balance <= amount)
-            throw new InvalidOperationException("No enough charge");
-        
+            throw new NotEnoughChargeException();
+
         Balance -= amount;
     }
 
     public void Debit(Money amount)
     {
-        Balance += amount;       
+        Balance += amount;
     }
 }

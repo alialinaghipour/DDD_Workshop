@@ -1,9 +1,10 @@
-public class Money
+
+public class Money : ValueObject
 {
     public decimal Value { get; }
     public Money(decimal amount)
     {
-        if (amount < 0) throw new InvalidOperationException("Money cannot be negative.");
+        if (amount < 0) throw new NegativeMoneyException();
         Value = amount;
     }
 
@@ -28,4 +29,11 @@ public class Money
     public static implicit operator Money(decimal amount)
     => new Money(amount);
 
+    public Money Add(Money amountToAdd)
+    => new Money(Value + amountToAdd.Value);
+
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
+    }
 }
