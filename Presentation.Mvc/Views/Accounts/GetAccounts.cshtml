@@ -1,0 +1,27 @@
+﻿@model IEnumerable<GetAllAccountsViewModel>
+
+@{
+    ViewData["Title"] = "accounts";
+}
+
+<p>
+    <a class="btn btn-outline-success" asp-action="OpenAccount">OpenAccount</a>
+</p>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Account Id</th>
+            <th scope="col">Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <th>@item.Id</th>
+                <td>@item.Balance</td>
+            </tr>
+        }
+    </tbody>
+</table>

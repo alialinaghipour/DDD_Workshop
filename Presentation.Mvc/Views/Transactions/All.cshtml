@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TransactionsViewModel>
+
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+<p>
+    <a class="btn btn-outline-primary" asp-action="DraftTransfer">Draft</a>
+    <a class="btn btn-outline-success" asp-action="Commit">Commit</a>
+</p>
+
+<h3>all</h3>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">TransactionId</th>
+            <th scope="col">Credit AccountId</th>
+            <th scope="col">Debit AccountId</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.transcriptId</th>
+                <th>@item.creditAccountId</th>
+                <td>@item.debitAccountId</td>
+                <td>@item.balance</td>
+                <td>@item.status</td>
+            </tr>
+        }
+    </tbody>
+</table>

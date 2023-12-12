@@ -1,0 +1,28 @@
+﻿@model OpenAccountCommand
+
+@{
+    ViewData["Title"] = "open account";
+}
+
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Bank</a></li>
+        <li class="breadcrumb-item active" aria-current="page">open account</li>
+    </ul>
+</nav>
+
+<form asp-action="OpenAccount" method="POST">
+    <div class="form-group">
+        <input asp-for="AccountId" type="text" class="form-control" id="accountId" aria-describedby="accountId" placeholder="Enter account id">
+    </div>
+    <br />
+    <div class="form-group">
+        <input asp-for="InitialBalance" type="number" class="form-control" id="InitialBalance" aria-describedby="InitialBalance" placeholder="Enter initial balance">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<br />  
+<p>
+    <a asp-action="GetAccounts" class="btn btn-secondary">Back to List</a>
+</p>

@@ -18,4 +18,9 @@ public class InMemoryAccounts : Accounts
     {
         records.Add(account);
     }
+
+    public IEnumerable<Account> GetAll()
+    {
+        return records;
+    }
 }
