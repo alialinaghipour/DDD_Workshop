@@ -1,3 +1,5 @@
+using Queries;
+
 public class AccountQueries
 {
     Accounts accounts;

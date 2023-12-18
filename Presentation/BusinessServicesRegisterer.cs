@@ -10,6 +10,7 @@ public static class BusinessServicesRegisterer
     {
         services.AddSingleton<IMessageDispatcher, MessageDispatcher>(s => new MessageDispatcher(s, typeof(IHandleMessage<>), Assembly.Load("Services")));
         services.AddSingleton<Accounts, InMemoryAccounts>();
+        services.AddSingleton<AccountQueries>();
         services.AddSingleton<Transactions, InMemoryTransactions>();
     }
 

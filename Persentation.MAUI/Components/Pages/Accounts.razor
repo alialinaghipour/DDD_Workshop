@@ -1,0 +1,40 @@
+﻿@page "/accounts"
+
+@inject ApiService ApiService
+@inject NavigationManager NavigationManager
+
+<button type="button" class="btn btn-primary mb-3" @onclick="GoToOpenAccountPage">Open Account</button>
+
+<h3 class="mt-4">Account List</h3>
+
+<table class="table table-bordered table-striped mt-3">
+    <thead class="thead-dark">
+        <tr>
+            <th>Account ID</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in accounts)
+        {
+            <tr>
+                <td>@account.Id</td>
+                <td>@account.Balance.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<GetAllAccountsViewModel> accounts = new List<GetAllAccountsViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        accounts = await ApiService.GetAllAccountsAsync();
+    }
+
+    private void GoToOpenAccountPage()
+    {
+        NavigationManager.NavigateTo("/open-account");
+    }
+}
