@@ -4,12 +4,19 @@ using Services;
 namespace Presentation.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("transactions")]
 public class TransactionsController : ControllerBase
 {
     readonly TransactionOrchestrator transactionOrchestrator;
-    public TransactionsController(TransactionOrchestrator transactionOrchestrator)
-        => this.transactionOrchestrator = transactionOrchestrator;
+    private readonly TransactionQueries transactionQueries;
+
+    public TransactionsController(
+        TransactionOrchestrator transactionOrchestrator,
+        TransactionQueries transactionQueries)
+    {
+        this.transactionOrchestrator = transactionOrchestrator;
+        this.transactionQueries = transactionQueries;
+    }
 
     [HttpPost("draft")]
     public void Draft([FromBody] DraftTransferCommand command)
@@ -18,4 +25,10 @@ public class TransactionsController : ControllerBase
     [HttpPost("commit")]
     public void Commit([FromBody] CommitTransferCommand command)
         => transactionOrchestrator.CommitTransfer(command);
+
+    [HttpGet]
+    public IEnumerable<TransactionsViewModel> GetAll()
+    {
+        return transactionQueries.All();
+    }
 }

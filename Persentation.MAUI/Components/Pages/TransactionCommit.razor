@@ -1,0 +1,36 @@
+﻿@page "/transaction-commit"
+@inject ApiService ApiService
+@inject NavigationManager NavigationManager
+
+<h3>Commit</h3>
+
+<EditForm Model="@commitTransferCommand" OnValidSubmit="HandleValidSubmit" class="mt-4">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="TransactionId">Transaction ID:</label>
+        <InputText id="TransactionId" @bind-Value="commitTransferCommand.TransactionId" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@code {
+    private CommitTransferCommand commitTransferCommand = new CommitTransferCommand();
+
+    private async Task HandleValidSubmit()
+    {
+        bool success = await ApiService.CommitTransfer(commitTransferCommand);
+
+        if (success)
+        {
+            NavigationManager.NavigateTo("/transactions");
+        }
+        else
+        {
+            // خطا در ارسال درخواست
+            // می‌توانید پیام خطا به کاربر نمایش دهید.
+        }
+    }
+}

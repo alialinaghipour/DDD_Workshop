@@ -1,0 +1,51 @@
+﻿@page "/transaction-draft"
+@inject ApiService ApiService
+@inject NavigationManager NavigationManager
+
+<h3>Transaction Draft</h3>
+
+<EditForm Model="@draftTransferCommand" OnValidSubmit="HandleValidSubmit" class="mt-4">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="TransactionId">Transaction Id:</label>
+        <InputText id="TransactionId" @bind-Value="draftTransferCommand.TransactionId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="CreditAccountId">CreditAccount Id:</label>
+        <InputText id="CreditAccountId" @bind-Value="draftTransferCommand.CreditAccountId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="DebitAccountId">DebitAccount Id:</label>
+        <InputText id="DebitAccountId" @bind-Value="draftTransferCommand.DebitAccountId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Amount">Amount:</label>
+        <InputNumber id="Amount" @bind-Value="draftTransferCommand.Amount" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@code {
+    private DraftTransferCommand draftTransferCommand = new DraftTransferCommand();
+
+    private async Task HandleValidSubmit()
+    {
+        bool success = await ApiService.DraftTransfer(draftTransferCommand);
+
+        if (success)
+        {
+            NavigationManager.NavigateTo("/transactions");
+        }
+        else
+        {
+            // خطا در ارسال درخواست
+            // می‌توانید پیام خطا به کاربر نمایش دهید.
+        }
+    }
+}
